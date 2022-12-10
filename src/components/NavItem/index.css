@@ -1,0 +1,28 @@
+.nav-route-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+
+  font-family: Roboto;
+
+  font-weight: 500;
+  font-size: 16px;
+  color: #94a3b8;
+}
+.highlight-item {
+  color: #f8fafc;
+}
+.item {
+  list-style: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #f8fafc;
+  margin: 0px 16px;
+}
+
+.link {
+  text-decoration: none;
+}
