@@ -31,6 +31,7 @@ class Header extends Component {
           <NavItem
             activeRouteId={activeTabId}
             routeDetails={obj}
+            key={obj.routeId}
             selectTabFunc={this.selectTabFunc}
           />
         ))}
@@ -53,6 +54,7 @@ class Header extends Component {
             {RoutesData.map(obj => (
               <NavItem
                 activeRouteId={activeTabId}
+                key={obj.routeId}
                 routeDetails={obj}
                 selectTabFunc={this.selectTabFunc}
               />
