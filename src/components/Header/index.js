@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {ImMenu2} from 'react-icons/im'
 
 import './index.css'
@@ -13,23 +13,37 @@ const RoutesData = [
 ]
 
 class Header extends Component {
-  state = {isToggleActive: false, activeTabId: 'Home'}
+  state = {isToggleActive: false, activePath: '/'}
+
+  componentDidMount() {
+    this.selectTabFunc()
+  }
 
   showDropDownMenuFunc = () => {
     this.setState(prevState => ({isToggleActive: !prevState.isToggleActive}))
   }
 
-  selectTabFunc = id => {
-    this.setState({activeTabId: id})
+  selectTabFunc = () => {
+    const {match} = this.props
+    const {path} = match
+
+    if (path === '/about' || path === '/vaccination') {
+      this.setState({activePath: path})
+    } else {
+      this.setState({activePath: '/'})
+    }
+
+    /*  console.log(match, 'header')
+   this.setState({activeTabId: id}) */
   }
 
   RenderDropDownMenu = () => {
-    const {activeTabId} = this.state
+    const {activePath} = this.state
     return (
       <ul className="navBar">
         {RoutesData.map(obj => (
           <NavItem
-            activeRouteId={activeTabId}
+            activePath={activePath}
             routeDetails={obj}
             key={obj.routeId}
             selectTabFunc={this.selectTabFunc}
@@ -40,7 +54,7 @@ class Header extends Component {
   }
 
   render() {
-    const {isToggleActive, activeTabId} = this.state
+    const {isToggleActive, activePath} = this.state
 
     return (
       <>
@@ -53,7 +67,7 @@ class Header extends Component {
           <ul className="navBar">
             {RoutesData.map(obj => (
               <NavItem
-                activeRouteId={activeTabId}
+                activePath={activePath}
                 key={obj.routeId}
                 routeDetails={obj}
                 selectTabFunc={this.selectTabFunc}
@@ -85,4 +99,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)

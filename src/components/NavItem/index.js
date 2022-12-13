@@ -3,24 +3,16 @@ import {Link} from 'react-router-dom'
 import './index.css'
 
 const NavItem = props => {
-  const {activeRouteId, selectTabFunc, routeDetails} = props
+  const {activePath, routeDetails} = props
   const {routeId, path} = routeDetails
-  const CallSelectTabFunc = () => {
+  /* const CallSelectTabFunc = () => {
     selectTabFunc(routeId)
-  }
-  const highlightRoute = activeRouteId === routeId ? 'highlight-item' : ''
+  } */
+  const highlightRoute = activePath === path ? 'highlight-item' : ''
 
   return (
     <Link to={path} className="link">
-      <li className="item">
-        <button
-          className={`nav-route-btn ${highlightRoute}`}
-          type="button"
-          onClick={CallSelectTabFunc}
-        >
-          {routeId}
-        </button>
-      </li>
+      <li className={`item ${highlightRoute}`}>{routeId}</li>
     </Link>
   )
 }

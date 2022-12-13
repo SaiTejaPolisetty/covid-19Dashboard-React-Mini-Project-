@@ -319,50 +319,52 @@ class Home extends Component {
   renderStateWiseStats = () => {
     const {stateWiseStats} = this.state
     return (
-      <div className="state-wise-states-table">
-        <div className="table-header">
-          <div className="state-name-heading">
-            <p className="table-header-title ">States/UT</p>
-            <button
-              className="order-btn"
-              type="button"
-              onClick={this.sortInAscendingOrder}
-              title="click to sort in ascending order"
-            >
-              <FcGenericSortingAsc className="sort-icon" />
-            </button>
+      <div className="state-wise-stats-container">
+        <div className="state-wise-states-table">
+          <div className="table-header">
+            <div className="state-name-heading">
+              <p className="table-header-title ">States/UT</p>
+              <button
+                className="order-btn"
+                type="button"
+                onClick={this.sortInAscendingOrder}
+                title="click to sort in ascending order"
+              >
+                <FcGenericSortingAsc className="sort-icon" />
+              </button>
 
-            <button
-              className="order-btn"
-              type="button"
-              onClick={this.sortInDescendingOrder}
-              title="click to sort in descending order"
-            >
-              <FcGenericSortingDesc className="sort-icon" />
-            </button>
+              <button
+                className="order-btn"
+                type="button"
+                onClick={this.sortInDescendingOrder}
+                title="click to sort in descending order"
+              >
+                <FcGenericSortingDesc className="sort-icon" />
+              </button>
+            </div>
+            <div className="other-tables-bar">
+              <p className="table-header-title">Confirmed</p>
+            </div>
+            <div className="other-tables-bar">
+              <p className="table-header-title">Active</p>
+            </div>
+            <div className="other-tables-bar">
+              <p className="table-header-title">Recovered</p>
+            </div>
+            <div className="other-tables-bar">
+              <p className="table-header-title">Deceased</p>
+            </div>
+            <div className="other-tables-bar">
+              <p className="table-header-title">Population</p>
+            </div>
           </div>
-          <div className="other-tables-bar">
-            <p className="table-header-title">Confirmed</p>
+          <div className="state-wise-data-container">
+            <ul className="other-tables">
+              {stateWiseStats.map(obj => (
+                <StateStatsItem key={obj.stateCode} StatData={obj} />
+              ))}
+            </ul>
           </div>
-          <div className="other-tables-bar">
-            <p className="table-header-title">Active</p>
-          </div>
-          <div className="other-tables-bar">
-            <p className="table-header-title">Recovered</p>
-          </div>
-          <div className="other-tables-bar">
-            <p className="table-header-title">Deceased</p>
-          </div>
-          <div className="other-tables-bar">
-            <p className="table-header-title">Population</p>
-          </div>
-        </div>
-        <div className="state-wise-data-container">
-          <ul className="other-tables">
-            {stateWiseStats.map(obj => (
-              <StateStatsItem key={obj.stateCode} StatData={obj} />
-            ))}
-          </ul>
         </div>
       </div>
     )
@@ -373,7 +375,7 @@ class Home extends Component {
     const searchResult = statesList.filter(state =>
       state.state_name.toLowerCase().includes(searchInput.toLowerCase()),
     )
-    console.log(searchResult)
+    /* console.log(searchResult) */
     this.setState({filteredSearchSuggestions: searchResult})
   }
 
@@ -402,40 +404,50 @@ class Home extends Component {
     this.setState({filteredSearchSuggestions: []})
   }
 
-  renderHomeContent = () => (
-    <div className="dataView">
-      <div className="country-stats">{this.renderOverallNationalData()}</div>
-      <div className="state-table">{this.renderStateWiseStats()}</div>
-    </div>
-  )
+  renderHomeContent = () => {
+    const {searchInput, filteredSearchSuggestions} = this.state
 
-  render() {
-    const {isLoading, filteredSearchSuggestions, searchInput} = this.state
     const showSearchSuggestions =
       filteredSearchSuggestions.length === 0
         ? null
         : this.renderSearchSuggestions()
+
+    return (
+      <>
+        <div className="search-container">
+          <BsSearch className="search-icon" />
+          <input
+            type="search"
+            placeholder="Enter the State"
+            className="search-bar"
+            onChange={this.onSearch}
+            onFocus={this.onSearch}
+            /* onBlurCapture={this.removeSearchSuggestions} */
+          />
+        </div>
+        {searchInput.length > 0 ? showSearchSuggestions : ''}
+        <div className="dataView">
+          <div className="country-stats">
+            {this.renderOverallNationalData()}
+          </div>
+          <div className="state-table">{this.renderStateWiseStats()}</div>
+        </div>
+        <Footer />
+      </>
+    )
+  }
+
+  render() {
+    const {isLoading} = this.state
+
     return (
       <>
         <Header />
         <div className="home-container">
           <div className="home-content-container">
-            <div className="search-container">
-              <BsSearch className="search-icon" />
-              <input
-                type="search"
-                placeholder="Enter the State"
-                className="search-bar"
-                onChange={this.onSearch}
-                onFocus={this.onSearch}
-                onBlur={this.removeSearchSuggestions}
-              />
-            </div>
-            {searchInput.length > 0 ? showSearchSuggestions : ''}
             {isLoading ? this.renderLoadingView() : this.renderHomeContent()}
           </div>
         </div>
-        <Footer />
       </>
     )
   }

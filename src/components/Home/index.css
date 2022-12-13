@@ -6,6 +6,7 @@
   height: 100%;
   min-height: 100vh;
   margin-top: 70px;
+  width: 100%;
 }
 
 @media screen and (max-width: 600px) {
@@ -17,6 +18,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .search-container {
@@ -68,8 +71,7 @@
 
 .stats-block-column {
   text-align: center;
-  min-width: 120px;
-  margin: 0px 10px;
+  width: 25%;
 }
 
 .stats-title {
@@ -111,6 +113,12 @@
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
   border-radius: 12px;
   align-self: flex-start;
+  min-width: 900px;
+}
+
+.state-wise-stats-container {
+  width: 100%;
+  overflow-x: scroll;
 }
 
 .table-header {
@@ -177,7 +185,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 170px;
+  height: 100vh;
 }
 
 .dataView {
@@ -201,15 +209,16 @@
     width: 90%;
   }
 
-  .country-stats {
-    width: 100%;
-  }
   .stats-number {
     font-size: 16px;
   }
-  .stats-block-column {
-    margin: 0px 3px;
+  .country-stats {
+    width: 100%;
   }
+  .stats-block-column {
+    width: 50%;
+  }
+
   .all-states-table {
     width: 800px;
     overflow-x: auto;
