@@ -23,12 +23,15 @@
   width: 25%;
 }
 
-@media screen and (min-width: 600px) and (max-width: 600px) {
+@media screen and (min-width: 600px) and (max-width: 1000px) {
   .cases-number {
     font-size: 16px;
   }
   .district-name {
     font-size: 12px;
+  }
+  .district-item {
+    width: 33%;
   }
 }
 @media screen and (max-width: 600px) {

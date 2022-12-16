@@ -58,13 +58,14 @@ class Header extends Component {
     /* <span className="india"> </span> <span className="india"> </span> */
     return (
       <>
-        <ul className="desktop-header-container">
-          <li>
-            <Link to="/" className="link">
-              <h1 className="logo">COVID19INDIA</h1>
-            </Link>
-          </li>
-          <li className="navBar">
+        <div className="desktop-header-container">
+          <Link to="/" className="link">
+            <h1 className="logo">
+              COVID19<span className="india">INDIA</span>
+            </h1>
+          </Link>
+
+          <ul className="navBar">
             {RoutesData.map(obj => (
               <NavItem
                 activePath={activePath}
@@ -73,13 +74,15 @@ class Header extends Component {
                 selectTabFunc={this.selectTabFunc}
               />
             ))}
-          </li>
-        </ul>
+          </ul>
+        </div>
         <div className="mobile-menu">
-          <ul className="mobile-header-container">
+          <div className="mobile-header-container">
             <li>
               <Link to="/" className="link">
-                <h1 className="logo">COVID19INDIA</h1>
+                <h1 className="logo">
+                  COVID19<span className="india">INDIA</span>
+                </h1>
               </Link>
             </li>
             <li>
@@ -91,7 +94,7 @@ class Header extends Component {
                 <ImMenu2 className="menuIcon" alt="menu" />
               </button>
             </li>
-          </ul>
+          </div>
           <div className="menu">
             {isToggleActive ? this.RenderDropDownMenu() : null}
           </div>
