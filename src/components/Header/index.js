@@ -55,16 +55,16 @@ class Header extends Component {
 
   render() {
     const {isToggleActive, activePath} = this.state
-
+    /* <span className="india"> </span> <span className="india"> </span> */
     return (
       <>
-        <div className="desktop-header-container">
-          <Link to="/" className="link">
-            <h1 className="logo">
-              COVID19<span className="india">INDIA</span>
-            </h1>
-          </Link>
-          <ul className="navBar">
+        <ul className="desktop-header-container">
+          <li>
+            <Link to="/" className="link">
+              <h1 className="logo">COVID19INDIA</h1>
+            </Link>
+          </li>
+          <li className="navBar">
             {RoutesData.map(obj => (
               <NavItem
                 activePath={activePath}
@@ -73,23 +73,25 @@ class Header extends Component {
                 selectTabFunc={this.selectTabFunc}
               />
             ))}
-          </ul>
-        </div>
+          </li>
+        </ul>
         <div className="mobile-menu">
-          <div className="mobile-header-container">
-            <Link to="/" className="link">
-              <h1 className="logo">
-                COVID19<span className="india">INDIA</span>
-              </h1>
-            </Link>
-            <button
-              type="button"
-              className="toggle-button"
-              onClick={this.showDropDownMenuFunc}
-            >
-              <ImMenu2 className="menuIcon" alt="menu" />
-            </button>
-          </div>
+          <ul className="mobile-header-container">
+            <li>
+              <Link to="/" className="link">
+                <h1 className="logo">COVID19INDIA</h1>
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="toggle-button"
+                onClick={this.showDropDownMenuFunc}
+              >
+                <ImMenu2 className="menuIcon" alt="menu" />
+              </button>
+            </li>
+          </ul>
           <div className="menu">
             {isToggleActive ? this.RenderDropDownMenu() : null}
           </div>

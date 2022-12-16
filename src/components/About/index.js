@@ -14,16 +14,16 @@ class About extends Component {
 
   getFaqs = async () => {
     const url = 'https://apis.ccbp.in/covid19-faqs'
-    const options = {method: 'GET'}
+    /* const options = {method: 'GET'} */
 
-    const response = await fetch(url, options)
+    const response = await fetch(url)
     const data = await response.json()
     const {faq} = data
     this.setState({isLoading: false, faqData: faq})
   }
 
   renderLoadingView = () => (
-    <div className=" loader-container">
+    <div className=" loader-container" testid="aboutRouteLoader">
       <Loader type="Oval" color="#007BFF" height="50" width="50" />
     </div>
   )
@@ -32,12 +32,12 @@ class About extends Component {
     const {faqData} = this.state
     return (
       <>
-        <ul className="faqs-list">
+        <ul className="faqs-list" testid="faqsUnorderedList">
           {faqData.map(obj => (
             <FaqItem
+              key={obj.qno}
               answer={obj.answer}
               question={obj.question}
-              key={obj.qno}
             />
           ))}
         </ul>

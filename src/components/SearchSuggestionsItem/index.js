@@ -6,11 +6,11 @@ const SearchSuggestionsItem = props => {
   const {stateDetails} = props
 
   return (
-    <li className="search-suggestion-container">
-      <Link
-        to={`/state/${stateDetails.state_code}`}
-        className="search-result-link"
-      >
+    <Link
+      to={`/state/${stateDetails.state_code}`}
+      className="search-result-link"
+    >
+      <li className="search-suggestion-container">
         <div className="search-suggestion">
           <h1 className="search-suggestion-name ">{stateDetails.state_name}</h1>
 
@@ -19,8 +19,8 @@ const SearchSuggestionsItem = props => {
             <BiChevronRightSquare alt="line icon" className="icon-right" />
           </button>
         </div>
-      </Link>
-    </li>
+      </li>
+    </Link>
   )
 }
 

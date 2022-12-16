@@ -11,9 +11,13 @@ const NavItem = props => {
   const highlightRoute = activePath === path ? 'highlight-item' : ''
 
   return (
-    <Link to={path} className="link">
-      <li className={`item ${highlightRoute}`}>{routeId}</li>
-    </Link>
+    <li className={`item ${highlightRoute}`}>
+      <Link to={path} className="link">
+        <button className={`nav-route-btn ${highlightRoute}`} type="button">
+          {routeId}
+        </button>
+      </Link>
+    </li>
   )
 }
 export default NavItem

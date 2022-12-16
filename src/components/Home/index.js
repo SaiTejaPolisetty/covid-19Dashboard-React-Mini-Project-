@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import Footer from '../Footer'
-import StateStatsItem from '../StateStatsItem'
+import StateStatsColumn from '../StateStatsColumn'
 
 import SearchSuggestionsItem from '../SearchSuggestionsItem'
 
@@ -179,10 +179,10 @@ class Home extends Component {
 
   getCovidData = async () => {
     const apiUrl = 'https://apis.ccbp.in/covid19-state-wise-data'
-    const options = {
+    /* const options = {
       method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
+    } */
+    const response = await fetch(apiUrl)
     if (response.ok === true) {
       /*  console.log(response) */
       const data = await response.json()
@@ -247,17 +247,17 @@ class Home extends Component {
 
     return (
       <>
-        <div className="stats-block-column">
+        <div className="stats-block-column" testid="countryWideConfirmedCases">
           <p className="stats-title red">Confirmed</p>
           <img
             src="https://res.cloudinary.com/dawykjhkh/image/upload/v1670669719/check-mark_1checkmark_gn1drl.png"
             className="stats-icon"
-            alt="country wide confirmed cases icon"
+            alt="country wide confirmed cases pic"
           />
           <p className="stats-number red">{totalConfirmedCases}</p>
         </div>
 
-        <div className="stats-block-column">
+        <div className="stats-block-column" testid="countryWideActiveCases">
           <p className="stats-title blue">Active</p>
           <img
             src="https://res.cloudinary.com/dawykjhkh/image/upload/v1670669719/protection_1protection_image_tvwph1.png"
@@ -267,7 +267,7 @@ class Home extends Component {
           <p className="stats-number blue">{totalActiveCases}</p>
         </div>
 
-        <div className="stats-block-column">
+        <div className="stats-block-column" testid="countryWideRecoveredCases">
           <p className="stats-title green">Recovered</p>
           <img
             src="https://res.cloudinary.com/dawykjhkh/image/upload/v1670669719/recovered_1recovered_img_h9h3uh.png"
@@ -277,7 +277,7 @@ class Home extends Component {
           <p className="stats-number green">{totalRecoveredCases}</p>
         </div>
 
-        <div className="stats-block-column ">
+        <div className="stats-block-column" testid="countryWideDeceasedCases">
           <p className="stats-title gray">Deceased</p>
           <img
             src="https://res.cloudinary.com/dawykjhkh/image/upload/v1670669719/breathing_1breathing_image_duhiky.png"
@@ -291,7 +291,7 @@ class Home extends Component {
   }
 
   renderLoadingView = () => (
-    <div className=" loader-container">
+    <div className=" loader-container" testid="homeRouteLoader">
       <Loader type="Oval" color="#007BFF" height="50" width="50" />
     </div>
   )
@@ -319,7 +319,10 @@ class Home extends Component {
   renderStateWiseStats = () => {
     const {stateWiseStats} = this.state
     return (
-      <div className="state-wise-stats-container">
+      <div
+        className="state-wise-stats-container"
+        testid="stateWiseCovidDataTable"
+      >
         <div className="state-wise-states-table">
           <div className="table-header">
             <div className="state-name-heading">
@@ -329,6 +332,7 @@ class Home extends Component {
                 type="button"
                 onClick={this.sortInAscendingOrder}
                 title="click to sort in ascending order"
+                testid="ascendingSort"
               >
                 <FcGenericSortingAsc className="sort-icon" />
               </button>
@@ -338,6 +342,7 @@ class Home extends Component {
                 type="button"
                 onClick={this.sortInDescendingOrder}
                 title="click to sort in descending order"
+                testid="descendingSort"
               >
                 <FcGenericSortingDesc className="sort-icon" />
               </button>
@@ -361,7 +366,7 @@ class Home extends Component {
           <div className="state-wise-data-container">
             <ul className="other-tables">
               {stateWiseStats.map(obj => (
-                <StateStatsItem key={obj.stateCode} StatData={obj} />
+                <StateStatsColumn key={obj.stateCode} StatData={obj} />
               ))}
             </ul>
           </div>
@@ -392,7 +397,10 @@ class Home extends Component {
     const {filteredSearchSuggestions} = this.state
 
     return (
-      <ul className="search-result-container">
+      <ul
+        className="search-result-container"
+        testid="searchResultsUnorderedList"
+      >
         {filteredSearchSuggestions.map(each => (
           <SearchSuggestionsItem key={each.state_code} stateDetails={each} />
         ))}
@@ -411,6 +419,8 @@ class Home extends Component {
       filteredSearchSuggestions.length === 0
         ? null
         : this.renderSearchSuggestions()
+
+    /* {searchInput.length > 0 ? showSearchSuggestions : ''} */
 
     return (
       <>
